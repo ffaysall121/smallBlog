@@ -111,4 +111,73 @@ else{
 
 
 
+
+
+else if(isset($_POST['update']))
+{
+
+$name = mysqli_real_escape_string($connection,$_POST['name']);
+$email = mysqli_real_escape_string($connection,$_POST['email']);
+$phone = mysqli_real_escape_string($connection,$_POST['phone']);
+$gender = mysqli_real_escape_string($connection,$_POST['gender']);
+$interest1 = serialize($_POST['interest']) ;
+$interest = mysqli_real_escape_string($connection,$interest1);
+
+$area = mysqli_real_escape_string($connection,$_POST['area']);
+
+$password = mysqli_real_escape_string($connection,$_POST['password']);
+$conPassword = mysqli_real_escape_string($connection,$_POST['confirm_password']);
+$id = mysqli_real_escape_string($connection,$_POST['id']);
+$oldImage = mysqli_real_escape_string($connection,$_POST['imageOld']);
+$imageName = $_FILES['image']['name'];
+
+if($imageName==''){
+    $newImageName=$oldImage;
+}
+else{
+$imageSize = $_FILES['image']['size'];
+$imageExt = pathinfo($imageName,PATHINFO_EXTENSION);
+$newImageName = uniqid(). '.' .$imageExt;
+}
+
+$path = "../images/";
+
+if($password!=$conPassword){
+    echo "Password are not same";
+    header("location:../profile.php");
+
+}
+
+
+
+else{
+    $sql = "UPDATE user SET  name='$name', email='$email', phone='$phone',gender='$gender', interest ='$interest',area='$area',image='$newImageName',password='$password' WHERE id='$id'";
+
+     $runSql = mysqli_query($connection,$sql);
+
+
+
+if($runSql){
+    move_uploaded_file($_FILES['image']['tmp_name'],$path.$newImageName);
+    
+    if($_FILES['image']['name'] != "")
+    {
+        unlink($path.$oldImage);
+    }
+   
+
+        header("location:../profile.php");
+    
+}
+}
+
+
+
+
+}
+
+else{
+    echo"Something went wrong";
+}
+
 ?>

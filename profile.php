@@ -102,7 +102,7 @@ include('functionUser.php');
         <label for="area">Choose your Area :</label>
 
 <select name="area" id="area" required>
-  <Asia value="asia" <?php inCheck("asia");?>>Asia</option>
+  <option value="asia" <?php inCheck("asia");?>>Asia</option>
   <option value="australia"<?php inCheck("australia");?>>Australia</option>
   <option value="europe"<?php inCheck("europe");?>>Europe</option>
   <option value="america"<?php inCheck("america");?>>America</option>
@@ -114,10 +114,13 @@ include('functionUser.php');
 <br>
 <input type="password" name="password" id="" placeholder="Password" value="<?=$data['password']; ?>"><br>
 <input type="password" name="confirm_password" id="" placeholder="Confirm Password" value="<?=$data['password']; ?>">
+<input type="hidden" name="id" value="<?=$data['id'] ?>">
+<input type="hidden" name="imageOld" value="<?=$data['image'] ?>">
 
+<!-- <span class="spn"><img src="images/eye-close.png" alt=""></span> -->
 <br>
         <!-- <button type="submit" name="submit">Submit</button> -->
-         <input class="btn" style="background-color: green; color:white" type="submit" name="Update info" value="Update">   
+         <input class="btn" style="background-color: green; color:white" type="submit" name="update" value="Update">   
         <?php
                 }
          ?>       

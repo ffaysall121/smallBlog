@@ -11,5 +11,9 @@ header("location:../login.php");
 }
 
 }
+else{
+    echo"Access Denied";
+header("location:../login.php");
+}
 
 ?>
